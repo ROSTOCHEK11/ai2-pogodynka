@@ -1,0 +1,46 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###
+
+### PhpStorm IDE configuration
+/.idea/
+### PhpStorm IDE configuration
+
+###> Environment and local configs ###
+/.env
+/.env.dev
+/.env.test
+/.env.prod
+/.env.backup
+/symfony.lock
+/composer.lock
+###< Environment and local configs ###
+
+###> System / cache / OS files ###
+*.log
+.DS_Store
+Thumbs.db
+###< System / cache / OS files ###
+
+###> Node / front-end dependencies (if used) ###
+/node_modules/
+/npm-debug.log
+/yarn-error.log
+###< Node / front-end dependencies (if used) ###
