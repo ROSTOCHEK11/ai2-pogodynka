@@ -31,7 +31,7 @@ class Location
     /**
      * @var Collection<int, WeatherData>
      */
-    #[ORM\OneToMany(targetEntity: WeatherData::class, mappedBy: 'location_id')]
+    #[ORM\OneToMany(targetEntity: WeatherData::class, mappedBy: 'location')]
     private Collection $weatherData;
 
     public function __construct()

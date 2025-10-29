@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WeatherData index{% endblock %}
+
+{% block body %}
+    <h1>WeatherData index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Temperature</th>
+                <th>Humidity</th>
+                <th>Pressure</th>
+                <th>Wind_speed</th>
+                <th>Weather_type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for weather_datum in weather_datas %}
+            <tr>
+                <td>{{ weather_datum.id }}</td>
+                <td>{{ weather_datum.date ? weather_datum.date|date('Y-m-d') : '' }}</td>
+                <td>{{ weather_datum.temperature }}</td>
+                <td>{{ weather_datum.humidity }}</td>
+                <td>{{ weather_datum.pressure }}</td>
+                <td>{{ weather_datum.windSpeed }}</td>
+                <td>{{ weather_datum.weatherType }}</td>
+                <td>
+                    <a href="{{ path('app_weather_data_show', {'id': weather_datum.id}) }}">show</a>
+                    <a href="{{ path('app_weather_data_edit', {'id': weather_datum.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_weather_data_new') }}">Create new</a>
+{% endblock %}

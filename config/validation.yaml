@@ -1,0 +1,136 @@
+App\Entity\Location:
+    properties:
+        city:
+            - NotBlank:
+                  message: "City name cannot be empty."
+                  groups: [create, edit]
+            - Length:
+                  min: 2
+                  max: 255
+                  minMessage: "City name must be at least {{ limit }} characters long."
+                  maxMessage: "City name cannot be longer than {{ limit }} characters."
+                  groups: [create, edit]
+
+        country:
+            - NotBlank:
+                  message: "Country code cannot be empty."
+                  groups: [create, edit]
+            - Length:
+                  min: 2
+                  max: 2
+                  exactMessage: "Country code must contain exactly 2 letters (e.g. PL, DE)."
+                  groups: [create, edit]
+
+        latitude:
+            - NotBlank:
+                  message: "Latitude cannot be empty."
+                  groups: [create, edit]
+            - Type:
+                  type: numeric
+                  message: "Latitude must be a number."
+                  groups: [create, edit]
+            - Range:
+                  min: -90
+                  max: 90
+                  notInRangeMessage: "Latitude must be between -90 and 90 degrees."
+                  groups: [create, edit]
+
+        longitude:
+            - NotBlank:
+                  message: "Longitude cannot be empty."
+                  groups: [create, edit]
+            - Type:
+                  type: numeric
+                  message: "Longitude must be a number."
+                  groups: [create, edit]
+            - Range:
+                  min: -180
+                  max: 180
+                  notInRangeMessage: "Longitude must be between -180 and 180 degrees."
+                  groups: [create, edit]
+
+
+App\Entity\WeatherData:
+    properties:
+        location:
+            - NotNull:
+                  message: "A location must be selected."
+                  groups: [create, edit]
+
+        date:
+            - NotBlank:
+                  message: "Date cannot be empty."
+                  groups: [create, edit]
+            - Type:
+                  type: \DateTimeInterface
+                  message: "Invalid date format."
+                  groups: [create, edit]
+            - GreaterThanOrEqual:
+                    value: "now"
+                    message: "The date cannot be in the past."
+                    groups: [ create, edit ]
+
+        temperature:
+            - NotBlank:
+                  message: "Temperature cannot be empty."
+                  groups: [create, edit]
+            - Type:
+                  type: numeric
+                  message: "Temperature must be a number."
+                  groups: [create, edit]
+            - Range:
+                  min: -100
+                  max: 100
+                  notInRangeMessage: "Temperature must be between -100°C and 100°C."
+                  groups: [create, edit]
+
+        humidity:
+            - NotBlank:
+                  message: "Humidity cannot be empty."
+                  groups: [create, edit]
+            - Type:
+                  type: numeric
+                  message: "Humidity must be a number."
+                  groups: [create, edit]
+            - Range:
+                  min: 0
+                  max: 100
+                  notInRangeMessage: "Humidity must be between 0% and 100%."
+                  groups: [create, edit]
+
+        pressure:
+            - NotBlank:
+                  message: "Pressure cannot be empty."
+                  groups: [create, edit]
+            - Type:
+                  type: numeric
+                  message: "Pressure must be a number."
+                  groups: [create, edit]
+            - Range:
+                  min: 800
+                  max: 1100
+                  notInRangeMessage: "Pressure must be between 800 and 1100 hPa."
+                  groups: [create, edit]
+
+        wind_speed:
+            - NotBlank:
+                  message: "Wind speed cannot be empty."
+                  groups: [create, edit]
+            - Type:
+                  type: numeric
+                  message: "Wind speed must be a number."
+                  groups: [create, edit]
+            - Range:
+                  min: 0
+                  max: 200
+                  notInRangeMessage: "Wind speed must be between 0 and 200 m/s."
+                  groups: [create, edit]
+
+        weather_type:
+            - NotBlank:
+                  message: "Weather type cannot be empty."
+                  groups: [create, edit]
+            - Length:
+                  max: 255
+                  maxMessage: "Weather type cannot exceed 255 characters."
+                  groups: [create, edit]

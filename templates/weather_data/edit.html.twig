@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit WeatherData{% endblock %}
+
+{% block body %}
+    <h1>Edit WeatherData</h1>
+
+    {{ include('weather_data/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_weather_data_index') }}">back to list</a>
+
+    {{ include('weather_data/_delete_form.html.twig') }}
+{% endblock %}
