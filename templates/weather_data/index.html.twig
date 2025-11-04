@@ -29,8 +29,15 @@
                 <td>{{ weather_datum.windSpeed }}</td>
                 <td>{{ weather_datum.weatherType }}</td>
                 <td>
-                    <a href="{{ path('app_weather_data_show', {'id': weather_datum.id}) }}">show</a>
-                    <a href="{{ path('app_weather_data_edit', {'id': weather_datum.id}) }}">edit</a>
+
+                    {% if is_granted('ROLE_WEATHER_SHOW') %}
+                        <a href="{{ path('app_weather_data_show', {'id': weather_datum.id}) }}">show</a>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_WEATHER_EDIT') %}
+                        <a href="{{ path('app_weather_data_edit', {'id': weather_datum.id}) }}">edit</a>
+                    {% endif %}
+
                 </td>
             </tr>
         {% else %}
@@ -41,5 +48,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_weather_data_new') }}">Create new</a>
+    {% if is_granted('ROLE_WEATHER_NEW') %}
+        <a href="{{ path('app_weather_data_new') }}">Create new</a>
+    {% endif %}
+
 {% endblock %}

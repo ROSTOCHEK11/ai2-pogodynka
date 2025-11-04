@@ -10,11 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/weather/data')]
 final class WeatherDataController extends AbstractController
 {
     #[Route(name: 'app_weather_data_index', methods: ['GET'])]
+    #[IsGranted('ROLE_WEATHER_INDEX')]
     public function index(WeatherDataRepository $weatherDataRepository): Response
     {
         return $this->render('weather_data/index.html.twig', [
@@ -23,6 +25,7 @@ final class WeatherDataController extends AbstractController
     }
 
     #[Route('/new', name: 'app_weather_data_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_WEATHER_NEW')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $weatherDatum = new WeatherData();
@@ -45,6 +48,7 @@ final class WeatherDataController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_weather_data_show', methods: ['GET'])]
+    #[IsGranted('ROLE_WEATHER_SHOW')]
     public function show(WeatherData $weatherDatum): Response
     {
         return $this->render('weather_data/show.html.twig', [
@@ -53,6 +57,7 @@ final class WeatherDataController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_weather_data_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_WEATHER_EDIT')]
     public function edit(Request $request, WeatherData $weatherDatum, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(WeatherDataType::class, $weatherDatum, [
@@ -73,6 +78,7 @@ final class WeatherDataController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_weather_data_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_WEATHER_DELETE')]
     public function delete(Request $request, WeatherData $weatherDatum, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$weatherDatum->getId(), $request->getPayload()->getString('_token'))) {
