@@ -125,4 +125,11 @@ class WeatherData
 
         return $this;
     }
+
+    public function getFahrenheit(): ?string
+    {
+        $fahrenheit = $this->temperature * 9 / 5 + 32;
+        return "$fahrenheit";
+    }
+
 }
